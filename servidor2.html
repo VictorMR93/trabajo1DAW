@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+        <title>Servidor web Nginx</title>
+        
+        <link rel="icon" type="image/gif" href="imagenes/faviconng.png" />
+	
+        <style type="text/css">
+        
+            @import url('https://fonts.googleapis.com/css?family=Orbitron');
+            @import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+            body{
+                background: url("imagenes/fondoblur.jpg") center center no-repeat fixed;
+            }
+
+            header{
+                /*border: 1px solid grey;*/
+                height: 100px;
+                width: 100%;
+                position: fixed; 
+            }
+
+            /*Lista de barra de navegación*/
+            ul{
+                list-style: none;
+                position: relative; 
+                left: 7%; /*Para posicionar la lista respecto del header*/
+                
+            }
+
+            @media screen and (max-width: 500px){
+                ul{
+                    display: none;
+                } 
+            }
+            @media screen and (min-width: 1500px){
+                ul{
+                    left: 12%; /*Para posicionar la lista respecto del header*/
+                } 
+            }
+            @media screen and (min-width: 1700px){
+                ul{
+                    left: 16%; /*Para posicionar la lista respecto del header*/
+                } 
+            }
+            @media screen and (min-width: 1900px){
+                ul{
+                    left: 20%; /*Para posicionar la lista respecto del header*/
+                } 
+            }
+
+            ul li{
+                font-size: 20px;
+                
+            }
+
+            ul li a{
+                border-radius: 20px;
+                color: white;
+                text-decoration: none;
+                float: left;
+                margin-right: 40px; 
+                padding: 20px;
+                font-family: Orbitron;
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            }
+
+            ul li a:hover{
+                transition-property: background;
+                transition-duration: 1s;
+            }
+
+            ul li #btinicio:hover{
+                background: url("imagenes/btinicio.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0); /*Para poner el color transparente*/
+            }
+
+            ul li #btintro:hover{
+                background: url("imagenes/btintroduccion.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+
+            ul li #btdescarga:hover{
+                background: url("imagenes/btdescarga.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+
+            ul li #btinsta:hover{
+                background: url("imagenes/btinstalacion.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+
+            ul li #btconfi:hover{
+                background: url("imagenes/btconfi.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+
+            ul li #btphp:hover{
+                background: url("imagenes/btphp.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+            /*Fin lista barra navegación*/
+
+            section{
+                font-family: 'Quicksand', sans-serif;
+                /*border: 1px solid green;*/
+                word-wrap: break-word;  /*si supera el div, corta el texto y lo pone abajo*/
+                margin: 0% 3% 3% 3%;
+                padding-top: 70px; /* Relleno "manual" para que la cabecera no se sobreponga en la sección*/
+                box-shadow: 14px 22px 73px -10px rgba(0,0,0,0.75); /*COMPROBAR AL FINAL DEL TODO SI QUEDA BIEN LA SOMBRA EN EL SECTION*/
+                
+            }
+
+			footer{
+                font-family: 'Quicksand', sans-serif;
+                /*border: 1px solid blue;*/
+                height: 100px;
+            }
+
+            /*Apartado de imágenes dentro del section (para darles un tamaño adecuado a cada una)*/
+            #imgintro{
+                width: 50%;
+                height: 50%;
+                margin: 5% 0% 0% 25%;
+            }
+
+            #imgdescarga{
+                width: 20%;
+                height: 20%;
+                margin: 5% 0% 0% 40%;
+            }
+
+            #imginsta{
+                width: 20%;
+                height: 20%;
+                margin: 5% 0% 0% 40%;
+            }
+
+            #imgconfi{
+                width: 20%;
+                height: 10%;
+                margin: 5% 0% 0% 40%;
+            }
+
+            #imgphp{
+                width: 20%;
+                height: 10%;
+                margin: 5% 0% 0% 40%;
+            }
+            /*fin apartado imágenes*/
+
+            #titApartado{
+                font-family: Orbitron;
+                font-size: 25px;
+                text-align: center; 
+            }
+
+            article{    /* Para centrar un poco más el contenido de las section y que no se expanda tanto a los lados  de la página*/
+                width: 80%;
+                margin-left: 10%;
+            }
+
+            #divCentrar{/* Div contenedor para centrar todas las imágenes dentro de los artículos*/
+                text-align: center;
+            }
+
+            #php{   /*Para darle un padding al último artículo y que no esté pegado con la caja*/
+                padding-bottom: 3%;
+            }
+
+			
+		</style>
+
+	</head>
+
+	<body>
+        
+        <header>
+            <ul>
+                <li><a href="inicio.html" id="btinicio">Inicio</a></li>
+                <li><a href="#introduccion" id="btintro">Introducción</a></li>
+                <li><a href="#descarga" id="btdescarga">Descarga</a></li>
+                <li><a href="#instalacion" id="btinsta">Instalación</a></li>
+                <li><a href="#confi" id="btconfi">Configuración</a></li>
+                <li><a href="#php" id="btphp">PHP</a></li>
+            </ul>
+        </header>
+
+        <section>
+
+            <article id="introduccion">
+                <img src="imagenes/imgservidor2.png" id="imgintro">
+                <img src="imagenes/ubuntu.png" id="imgintro">
+                <p id="titApartado">Introducción</p>
+                <p>Para los que no hayan escuchado hablar de Nginx, decir que se trata de un servidor web y proxy inverso de código abierto ligero de alto rendimiento,
+                    que también incluye servicios de correo electrónico con acceso al Internet Message Protocol (IMAP) y al servidor Post Office Protocol (POP). Además, NGINX  está listo para 
+                    ser utilizado como un proxy inverso. En este modo, NGINX se utiliza para equilibrar la carga entre los servidores back-end, o para proporcionar almacenamiento en caché para un 
+                    servidor back-end lento.<br><br>
+                    Hasta bien poco, Apache era el rey indiscutible en el mundo de los servidores web, pero año tras año, la popularidad de este 
+                    servidor web ha id en aumento y empresas punteras de Internet como Facebook o WordPress lo utilizan en sus portales.<br>
+                    <div id="divCentrar"><img src="imagenes/imgS2/01.png"></div>
+                    <br>Según un estudio llevado a cabo por el portal Netcraft, a principios de septiembre de 2013 la cuota de mercado Nginx ascendía
+                     al 15,11%, situándolo en tercera posición detrás de Apache y IIS de Microsoft.<br><br>
+                     Al igual que ocurre con Apache, Nginx posee muchas funcionalidades implementadas modularmente que sólo hay que habilitarlas cuando
+                      se vayan hacer uso de ellas.
+                </p>
+                <p>Son muchas las características que  nos ofrece este servidor web, pero una de las más importantes es que se trata de un software
+                     que es asíncrono, a diferencia de Apache que está basada en procesos. La ventaja principal de ser asíncrono, es su  
+                     escalabilidad. En un sistema basado en procesos, cada conexión simultánea requiere de un hilo, lo que puede llevar a 
+                     sobrecargar el servidor, mientras que en un servidor asíncrono se gestionan las peticiones en muy pocos hilos, reduciendo las
+                      posibilidades de sobrecarga en el servidor.
+                    <br><br>Otras características que ofrece el servidor Nginx son:<br><br>
+                            -Capaz de manejar más de 10.000 conexiones simultáneas con un uso bajo de memoria.
+                            <br>-Balanceo de carga, distribuye la carga entre los servidores que formen parte de la estructura, 
+                            redirigiendo cada vez la petición hacia aquella máquina que tenga una menor carga.
+                            <br>-Alta tolerancia a fallos.
+                            <br>-Soporte para TSL, SSL, FastCGI, SCGI o uWSGI, entre otros.
+                            <br>-Compatible con el nuevo estándar de direcciones IPv6.
+                            <br>-Compresión y descompresión con Gzip, que permite comprimir al  vuelo los archivos y datos que se  mueven por la red, 
+                            desde el servidor web hasta el navegador del usuario
+                            <br>-Reescritura de urls, para crear urls amigables que nos ayuden en el proceso del posicionamiento web, aunque a diferencia
+                            de Apache, Nginx no hace uso del fichero .htaccess, sino que las reglas de reescritura las carga directamente en su configuración.
+                            <br>-Permite limitar el número de conexiones concurrentes.
+                            <br>-Geolocalización basada en direcciones IP
+                            <br><br>Además de lo comentado anteriormente, Nginx puede almacenar contenido estático como imágenes con lo que se quita
+                             carga a los servidores web, mejorando la velocidad de carga de las páginas.
+                </p>
+            </article>
+
+            <article id="descarga">
+                <br><br><br>
+                <img src="imagenes/btdescarga.png" id="imgdescarga">
+                <p id="titApartado">Descarga</p>
+                <p>A lo largo de la guía encontrarás detalladamente qué archivos son los necesarios para la instalación del servidor Nginx y cuándo utilizarlos, 
+                        así como del módulo PHP. Te dejamos a continuación en esta sección todos los necesarios:</p>
+                <p>Dependencias: # apt-get install build-essential libssl-dev libpcre3-dev<br>
+                   Nginx: $ wget http://nginx.org/download/nginx-1.2.6.tar.gz<br>
+                   PHP: # apt-get install php5-fpm</p>
+            </article>
+
+            <article id="instalacion">
+                <br><br><br>
+                <img src="imagenes/btinstalacion.png" id="imginsta">
+                <p id="titApartado">Instalación</p>
+                <p>Nginx está pensado para ser instalado en cualquier servidor dedicado, estructura cloud o VPS, ya que es necesario tener acceso
+                        como administrador para poder llevar a cabo la instalación de este servidor web.
+                       <br><br>En nuestro ejemplo veremos el proceso de instalación de Nginx en un servidor con sistema operativo Linux, aunque el proceso
+                        de instalación en otro sistema operativo es muy parecido.</p>
+                <p>Una vez logueados como administradores, antes de poder compilar nginx, es necesario instalar unos cuantos paquetes y dependencias:
+                    <br><br># apt-get install build-essential libssl-dev libpcre3-dev
+                    <br><br>El paquete build-essential contiene las herramientas básicas para compilar programas desde código fuente, las otras dos 
+                    librerías son necesarias para nginx durante el proceso de compilación.
+                    <br><br>Descargar y compilar Nginx:
+                    <br><br>$ wget http://nginx.org/download/nginx-1.2.6.tar.gz
+                    <br><br>Descomprimimos el fichero:
+                    <br><br>$ tar zxvf nginx-1.2.6.tar.gz
+                    <br><br>Una vez descomprimido, entramos en el directorio y compilamos:
+                    <br><br>$ cd nginx-1.2.6
+                    <br>~/nginx-1.2.6$ ./configure --sbin-path=/usr/local/sbin --with-http_ssl_module --without-mail_pop3_module --without-mail_imap_module --without-mail_smtp_module --with-http_stub_status_module
+                    <br>~/nginx-1.2.6$ make
+                    <br>~/nginx-1.2.6$ sudo make install
+                    <br>Para consultar qué modulos hay disponibles hay que visitar la pagina oficial de Nginx <a href="http://www.wiki.nginx.org/Modules">(Ir)</a>
+                     y decidir cuáles queremos habilitar. Con la opción --sbin-path=/usr/local/sbin establecemos la ruta en la que se instalará el
+                      ejecutable. Tras compilar se mostrará información de la localización de los distintos ficheros:
+                    <br><br>nginx path prefix: "/usr/local/nginx"
+                    <br>nginx binary file: "/usr/local/sbin"
+                    <br>nginx configuration prefix: "/usr/local/nginx/conf"
+                    <br>nginx configuration file: "/usr/local/nginx/conf/nginx.conf"
+                    <br>nginx pid file: "/usr/local/nginx/logs/nginx.pid"
+                    <br>nginx error log file: "/usr/local/nginx/logs/error.log"
+                    <br>nginx http access log file: "/usr/local/nginx/logs/access.log"
+                    <br>nginx http client request body temporary files: "client_body_temp"
+                    <br>nginx http proxy temporary files: "proxy_temp"
+                    <br>nginx http fastcgi temporary files: "fastcgi_temp"
+                    <br>nginx http uwsgi temporary files: "uwsgi_temp"
+                    <br>nginx http scgi temporary files: "scgi_temp"
+                </p>
+                <p>Es necesario descargar un script que permita detener, reiniciar e iniciar nginx, podemos descargar el siguiente:
+                    <br><br>$ wget https://raw.github.com/JasonGiedymin/nginx-init-ubuntu/master/nginx
+                    <br>$ sudo mv nginx /etc/init.d/nginx
+                    <br>$ sudo chmod +x /etc/init.d/nginx
+                    <br>$ sudo chown root:root /etc/init.d/nginx
+                    <br>En el tercer comando otorgamos permiso de ejecución al script, con el cuarto hacemos al usuario root propietario del mismo
+                    <br>Si queremos que nginx se inicie automáticamente al iniciar el sistema, hay que añadirlo a los runlevel correspondientes:
+                    <br><br># update-rc.d nginx defaults
+                    <br><br>Ahora estamos en condiciones de ejecutar nginx:
+                    <br><br># /etc/init.d/nginx start
+                    <br>[ ok ] Starting Nginx Server...:.
+                    <br><br>Listo, nos dirigimos a nuestro navegador y escribimos en la barra de direcciones localhost. Si todo ha ido bien 
+                    deberíamos ver esta pantalla:
+                    <div id="divCentrar"><img src="imagenes/imgS2/02.png"></div>
+                    <br>Usando firebug se puede comprobar que efectivamente se está corriendo un servidor nginx:
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS2/03.png"></div>
+                </p>
+            </article>
+
+            <article id="confi">
+                <br><br><br>
+                <img src="imagenes/btconfi.png" id="imgconfi">
+                <p id="titApartado">Configuración</p>
+                <p>Sustituimos la configuración por defecto por esta:
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS2/04.png"></div>
+                            <div id="divCentrar"><img src="imagenes/imgS2/05.png"></div> 
+                    <br>Versión para copiar y pegar:                  
+                    <br><textarea rows="5" cols="30">
+                        user  www-data;
+                        worker_processes  1;
+                        
+                        pid        /var/run/nginx.pid;
+                        
+                        error_log  logs/error.log;
+                        
+                        events {
+                            worker_connections  1024;
+                        }
+                        
+                        http {
+                            include       mime.types;
+                            default_type  application/octet-stream;
+                        
+                            gzip on;
+                            gzip_buffers 16 8k;
+                            gzip_disable "MSIE [1-6]\.";
+                            gzip_proxied any;
+                            gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+                        
+                            log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                                              '$status $body_bytes_sent "$http_referer" '
+                                              '"$http_user_agent" "$http_x_forwarded_for"';
+                        
+                            access_log  logs/access.log  main;
+                        
+                            sendfile        on;
+                            keepalive_timeout  3;
+                            index              index.html index.htm;
+                        
+                            server {
+                                listen       80;
+                                server_name localhost;
+                                root html;
+                        
+                         access_log  logs/host.access.log  main;
+                        
+                                # Deny all attempts to access hidden files such as .htaccess, .htpasswd, .DS_Store (Mac).
+                                location ~ /\. {
+                                        deny all;
+                                        access_log off;
+                                        log_not_found off;
+                                }
+                        
+                            }
+                        }</textarea>    
+                        
+                </p>
+                <p>Los cambios más relevantes sobre la configuración por defecto son:
+                    <br><br>-Se ha cambiado el usuario del servidor de “*nobody*” a “*www-data*”, éste último es el usuario por defecto para servidores webs
+                    <br>-Se define el archivo donde se localizará el PID (Process ID) del servidor. Esto permite al script que hemos instalado iniciar o detener nginx.
+                    <br>-Se habilita la compresión gzip para reducir el ancho de banda consumido.
+                    <br>-Se define el formato que tendrán los ficheros de log.
+                    <br><br>Cambiamos los permisos de los ficheros que contienen la web y reiniciamos nginx para aplicar los cambios:
+                    <br><br>$ sudo chown -R www-data:www-data html/
+                    <br>$ sudo service nginx destroy && sudo service nginx start
+                </p>
+            </article>
+
+            <article id="php">
+                <br><br><br>
+                <img src="imagenes/btphp.png" id="imgphp">
+                <p id="titApartado">Módulo PHP</p>
+                <p>En lugar de instalar php5, instalaremos php5-fpm (FastCGI Process Manager), una implementación alternativa con algunas características
+                     adicionales.
+                    <br><br>En ubuntu, ejecutamamos el siguiente comando:
+                    <br><br># apt-get install php5-fpm
+                    <br><br>En debian agregamos el repositorio al sources.list:
+                    <br><br>deb http://packages.dotdeb.org stable all
+                    <br>deb-src http://packages.dotdeb.org stable all
+                    <br><br>Agregamos la llave GnuPG del repositorio:
+                    <br><br>apt-get update
+                    <br>wget http://www.dotdeb.org/dotdeb.gpg
+                    <br>cat dotdeb.gpg | sudo apt-key add -
+                    <br><br>Instalamos php:
+                    <br><br># apt-get install php5-cli php5-suhosin php5-fpm php5-cgi php5-mysql
+                    <br><br>Lo iniciamos:
+                    <br><br># /etc/init.d/php5-fpm start
+                    <br><br>Para lograr que nginx interprete php, hay que hacer algunas modificaciones a la configuración:
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS2/07.png"></div>
+                    <div id="divCentrar"><img src="imagenes/imgS2/08.png"></div></p>
+                    <br>Versión para copiar y pegar:                  
+                    <br><textarea rows="5" cols="30">
+                            user  www-data;
+                            worker_processes  1;
+                            
+                            pid        /var/run/nginx.pid;
+                            
+                            error_log  logs/error.log;
+                            
+                            events {
+                                worker_connections  1024;
+                            }
+                            
+                            http {
+                                include       mime.types;
+                                default_type  application/octet-stream;
+                            
+                                gzip on;
+                                gzip_buffers 16 8k;
+                                gzip_disable "MSIE [1-6]\.";
+                                gzip_proxied any;
+                                gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+                            
+                                log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                                                  '$status $body_bytes_sent "$http_referer" '
+                                                  '"$http_user_agent" "$http_x_forwarded_for"';
+                            
+                                access_log  logs/access.log  main;
+                            
+                                sendfile        on;
+                                keepalive_timeout  3;
+                                index              index.php index.html index.htm;
+                            
+                                upstream php {
+                                    server 127.0.0.1:9000;
+                                }
+                            
+                                server {
+                                    listen       80;
+                                    server_name localhost;
+                                    root html;
+                            
+                              access_log  logs/host.access.log  main;
+                            
+                                    # Deny all attempts to access hidden files such as .htaccess, .htpasswd, .DS_Store (Mac).
+                                    location ~ /\. {
+                                            deny all;
+                                            access_log off;
+                                            log_not_found off;
+                                    }
+                            
+                                    location ~ \.php$ {
+                                            include fastcgi_params;
+                                            fastcgi_index index.php;
+                                            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                                            fastcgi_pass php;
+                                    }
+                                }
+                            }</textarea>
+                <p>Los principales cambios realizados son los siguientes:
+                    <br><br>-Se ha añadido index.php antes de index.html index.htm para dar prioridad a los archivos php.
+                    <br>-El bloque upstream php que apunta a PHP-FPM.
+                    <br>-Un manejador para archivos php location ~ \.php$
+                    <br><br>Para terminar, añadimos los siguientes parámetros al final del archivo /usr/local/nginx/fastcgi_params:
+                    <br><br>fastcgi_connect_timeout 60;
+                    <br>fastcgi_send_timeout 180;
+                    <br>fastcgi_read_timeout 180;
+                    <br>fastcgi_buffer_size 128k;
+                    <br>fastcgi_buffers 4 256k;
+                    <br>fastcgi_busy_buffers_size 256k;
+                    <br>fastcgi_temp_file_write_size 256k;
+                    <br>fastcgi_intercept_errors on;
+                    <br><br>Para aplicar los cambios, reiniciamos nginx:
+                    <br><br># service nginx restart
+                    <br><br>Con esto, deberíamos tener instalado un servidor corriendo con nginx y ejecutando archivos php.
+                </p>
+                <p>Fuentes: <a href="https://www.acens.com/wp-content/images/2013/09/servidor-web-nginx-white-paper-acens.pdf">Fuente 1</a>,
+                    <a href="https://elbauldelprogramador.com/como-instalar-nginx-con-php5-fpm/">Fuente 2</a></p>
+            </article>
+
+        </section>
+
+        <footer>
+            <br>
+            Trabajo Diseño interfaces web (primer trimestre)<br>
+            Víctor Montes Rodríguez<br>
+            Curso 2017-2018<br>
+        </footer>
+    
+
+	</body>
+</html>

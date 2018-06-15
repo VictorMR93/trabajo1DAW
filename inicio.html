@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+        <title>Inicio</title>
+        
+        <link rel="icon" type="image/gif" href="imagenes/favicon.gif" />
+        
+        <style type="text/css">
+
+            @import url('https://fonts.googleapis.com/css?family=Russo+One');
+            @import url('https://fonts.googleapis.com/css?family=Orbitron');
+
+            body{
+                background: url("imagenes/fondoblur.jpg") center center no-repeat fixed;
+            }
+
+			.btS1, .btS2, .btS3{
+                font-size: 32px;
+                width: 200px;
+                text-align: center;
+                font-family: 'Orbitron', sans-serif;
+                color:white;
+                border-radius: 15px;
+                padding: 15px 25px 15px 25px;
+                /*background-color: #60a9d6;*/
+                /*background: linear-gradient(gray, black, #562731);*/ 
+                border: none;
+                margin: 0px 120px 0px 0px;
+                /*box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);*/
+                box-shadow: 14px 22px 73px -10px rgba(0,0,0,0.75);
+                text-shadow: 0px -1px 0px rgba(000,000,000,1), 0px 1px 0px rgba(255,255,255,0.2);
+                
+                
+            }
+
+            a:link {
+                text-decoration: none;
+            }
+
+            .btS1{
+                position: absolute;
+                left: 10%;
+                top: 40%;
+            }
+
+            .btS2{
+                position: absolute;
+                left: 40%;
+                top: 40%;
+            }
+
+            .btS3{
+                position: absolute;
+                left: 70%;
+                top: 40%;
+            }
+
+            .btS1:hover, .btS2:hover, .btS3:hover{
+                transition-duration: 2s;
+                transition-property: background-color;
+            }
+
+            .btS1:hover{
+                background-color: #D42129;
+                
+            }
+
+            .btS2:hover{
+                background-color: #039639;
+            }
+
+            .btS3:hover{
+                background-color: #3465A4;
+            }
+
+            .btS1:hover + #imgServ1{
+                background: url("imagenes/imgservidor1.png") no-repeat center;
+                background-size: contain;
+                transition-property: background;
+                transition-duration: 2s;
+            }
+
+            .btS2:hover + #imgServ2{
+                background: url("imagenes/imgservidor2.png") no-repeat center;
+                background-size: 60%;
+                transition-property: background;
+                transition-duration: 2s;
+            }
+
+            .btS3:hover + #imgServ3{
+                background: url("imagenes/imgservidor3.png") no-repeat center;
+                background-size: contain;
+                transition-property: background;
+                transition-duration: 2s;
+            }
+            
+            #divServidores{
+                position: absolute;
+                left: 10%;
+                bottom: 10%;
+                /*top: 50%;*/
+                width: 80%;
+                height: 80%;
+                /*border: 2px solid orange;*/
+            }
+
+            #imgServ1, #imgServ2, #imgServ3{
+                /*border: 2px solid purple;*/
+                width: 100%;
+                height: 39%;
+                position: absolute;
+                right: 0%;
+                top: -5%;
+                bottom: 0%
+            }
+
+            #divTextoServ1, #divTextoServ2, #divTextoServ3{
+                color:black;
+                font-size: 18px;
+                font-family: 'Orbitron', sans-serif;
+                text-align: left;
+                /*border: 1px solid purple;*/
+                position: absolute;
+                width: 350%;
+                height: 280%;
+                top: 115px;
+                display:none;
+            }
+
+            #divTextoServ1{
+                left: 10%;
+            }
+
+            #divTextoServ2{
+                left: -120%;
+            }
+
+            #divTextoServ3{
+                right: 0%;
+            }
+
+            .btS1:hover #divTextoServ1{
+                display: block;
+                
+            }
+            
+            .btS2:hover #divTextoServ2{
+                display: block;
+                
+            }
+
+            .btS3:hover #divTextoServ3{
+                display: block;
+                
+            }
+
+            #divTextoInicial{
+                position: absolute;
+                width: 100%;
+                height: 40%;
+                top: -5%;
+                /*border: 1px solid blue;*/
+                background: url("imagenes/fuente1mov.gif") no-repeat center;    /*fuente2mov.gif tb me gusta*/
+                background-size: contain; 
+            }
+
+            /* Campo para ocultar el texto inicial "elige servidor"*/
+            #divServidores:hover #divTextoInicial{
+                opacity: 0;
+                transition-property: opacity;
+                transition-duration: 0.5s;
+                
+            }
+
+            /* Campo para mostrar el texto inicial cuando sale del div grande*/
+            html:hover #divTextoInicial{
+                opacity: 1;
+                transition-property: opacity;
+                transition-duration: 0.5s;
+                
+            }
+			
+		</style>
+
+	</head>
+
+	<body>
+        
+        <div id="divServidores">
+
+            <a class="btS1" href="servidor1.html">Apache<div id="divTextoServ1">Autor: Robert McCool<br>Desarrollador: Apache Software Foundation<br>Lanzamiento: abril de 1995
+            <br><br>El servidor HTTP Apache es un servidor web HTTP de código abierto, multiplataforma, que implementa el protocolo HTTP/1.12​ y la noción de sitio virtual.
+            Presenta entre otras características altamente configurables, bases de datos de autenticación y negociado de contenido.</div></a>
+            <div id="imgServ1"></div>
+
+            <a class="btS2" href="servidor2.html">Nginx<div id="divTextoServ2">Autor: Igor Sysoev<br>Desarrollador: NGINX, Inc. e Igor Sysoev<br>
+            Lanzamiento: 4 de octubre de 2004<br><br>Nginx es un servidor web/proxy inverso ligero de alto
+             rendimiento y un proxy para protocolos de correo electrónico (IMAP/POP3). Es software libre, multiplataforma y de código abierto, licenciado bajo la
+              Licencia BSD simplificada; también existe una versión comercial distribuida bajo el nombre de nginx plus.</div></a>
+            <div id="imgServ2"></div>
+
+            <a class="btS3" href="servidor3.html">Cherokee<div id="divTextoServ3">Autor: Álvaro López Ortega<br>Desarrollador: Cherokee Project<br>Lanzamiento: 2001
+            <br><br>Cherokee se inició en 2001 de la mano de Álvaro López Ortega. La motivación fue construir un servidor web nuevo, algo más nuevo
+             que el servidor NCSA HTTPd y no tan grande y pesado como el servidor HTTP Apache, ambos con más de 15 años de edad. Actualmente es 
+             desarrollado y mantenido por una comunidad abierta de desarrolladores.</div></a>
+            <div id="imgServ3"></div>
+
+            <div id="divTextoInicial"></div>
+    
+        </div>
+        
+
+	</body>
+</html>

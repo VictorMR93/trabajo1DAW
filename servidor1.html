@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+        <title>Servidor web Apache</title>
+        
+        <link rel="icon" type="image/gif" href="imagenes/faviconap.ico" />
+	
+        <style type="text/css">
+        
+            @import url('https://fonts.googleapis.com/css?family=Orbitron');
+            @import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+            body{
+                background: url("imagenes/fondoblur.jpg") center center no-repeat fixed;
+            }
+
+            header{
+                /*border: 1px solid grey;*/
+                height: 100px;
+                width: 100%;
+                position: fixed; 
+            }
+            
+            /*Lista de barra de navegación*/
+            ul{
+                list-style: none;
+                position: relative; 
+                left: 7%; /*Para posicionar la lista respecto del header*/     
+            }
+
+            /*Media queries para variar el tamaño de la barra de navegación fija (si es menos de 500px no se muestra)*/
+            @media screen and (max-width: 500px){
+                ul{
+                    display: none;
+                } 
+            }
+            @media screen and (min-width: 1500px){
+                ul{
+                    left: 12%; /*Para posicionar la lista respecto del header*/
+                } 
+            }
+            @media screen and (min-width: 1700px){
+                ul{
+                    left: 16%; /*Para posicionar la lista respecto del header*/
+                } 
+            }
+            @media screen and (min-width: 1900px){
+                ul{
+                    left: 20%; /*Para posicionar la lista respecto del header*/
+                } 
+            }
+
+            ul li{
+                font-size: 20px;    
+            }
+
+            ul li a{
+                border-radius: 20px;
+                color: white;
+                text-decoration: none;
+                float: left;
+                margin-right: 40px; 
+                padding: 20px;
+                font-family: Orbitron;
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            }
+
+            ul li a:hover{
+                transition-property: background;
+                transition-duration: 1s;
+            }
+
+            ul li #btinicio:hover{
+                background: url("imagenes/btinicio.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0); /*Para poner el color transparente*/
+            }
+
+            ul li #btintro:hover{
+                background: url("imagenes/btintroduccion.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+
+            ul li #btdescarga:hover{
+                background: url("imagenes/btdescarga.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+
+            ul li #btinsta:hover{
+                background: url("imagenes/btinstalacion.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+
+            ul li #btconfi:hover{
+                background: url("imagenes/btconfi.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+
+            ul li #btphp:hover{
+                background: url("imagenes/btphp.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+            /*Fin lista barra navegación*/
+
+            section{
+                font-family: 'Quicksand', sans-serif;
+                /*border: 1px solid green;*/
+                word-wrap: break-word;  /*si supera el div, corta el texto y lo pone abajo*/
+                margin: 0% 3% 3% 3%;
+                padding-top: 70px; /* Relleno "manual" para que la cabecera no se sobreponga en la sección*/
+                box-shadow: 14px 22px 73px -10px rgba(0,0,0,0.75);   
+            }
+
+			footer{
+                font-family: 'Quicksand', sans-serif;
+                /*border: 1px solid blue;*/
+                height: 100px;
+            }
+
+            /*Apartado de imágenes dentro del section (para darles un tamaño adecuado a cada una)*/
+            #imgintro{
+                width: 50%;
+                height: 50%;
+                margin: 5% 0% 0% 25%;
+            }
+
+            #imgdescarga{
+                width: 20%;
+                height: 20%;
+                margin: 5% 0% 0% 40%;
+            }
+
+            #imginsta{
+                width: 20%;
+                height: 20%;
+                margin: 5% 0% 0% 40%;
+            }
+
+            #imgconfi{
+                width: 20%;
+                height: 10%;
+                margin: 5% 0% 0% 40%;
+            }
+
+            #imgphp{
+                width: 20%;
+                height: 10%;
+                margin: 5% 0% 0% 40%;
+            }
+            /*fin apartado imágenes*/
+
+            #titApartado{
+                font-family: Orbitron;
+                font-size: 25px;
+                text-align: center; 
+            }
+
+            article{    /* Para centrar un poco más el contenido de las section y que no se expanda tanto a los lados  de la página*/
+                width: 80%;
+                margin-left: 10%;
+            }
+
+            #divCentrar{/* Div contenedor para centrar todas las imágenes dentro de los artículos*/
+                text-align: center;
+            }
+            
+            /*#divCodigos{ /*Para estilizar los códigos o comandos    
+                border-width:3px;  
+                border-color: black;
+                border-style:dashed;
+                display: inline-block;    
+            }*/
+            
+            #php{   /*Para darle un padding al último artículo y que no esté pegado con la caja*/
+                padding-bottom: 3%;
+            }
+
+            /*Estilizar los títulos*/
+            h3{
+                color: blue;
+            }
+
+			
+		</style>
+
+	</head>
+
+	<body>
+        
+        <header>
+            <ul>
+                <li><a href="inicio.html" id="btinicio">Inicio</a></li>
+                <li><a href="#introduccion" id="btintro">Introducción</a></li>
+                <li><a href="#descarga" id="btdescarga">Descarga</a></li>
+                <li><a href="#instalacion" id="btinsta">Instalación</a></li>
+                <li><a href="#confi" id="btconfi">Configuración</a></li>
+                <li><a href="#php" id="btphp">PHP</a></li>
+            </ul>
+        </header>
+
+        <section>
+
+            <article id="introduccion">
+                <img src="imagenes/imgservidor1.png" id="imgintro">
+                <img src="imagenes/windows.png" id="imgintro">
+                <p id="titApartado">Introducción</p>
+                <p>El servidor HTTP Apache es un servidor web HTTP de código abierto, para plataformas Unix (BSD, GNU/Linux, etc.), Microsoft Windows,
+                     Macintosh y otras, que implementa el protocolo HTTP/1.12​ y la noción de sitio virtual.</p>
+                <p>La historia de Apache se remonta a febrero de 1995, donde empieza el proyecto del grupo Apache, el cual esta basado en el servidor
+                     Apache httpd de la aplicación original de NCSA. El desarrollo de esta aplicación original se estancó por algún tiempo tras la 
+                     marcha de Rob McCool.</p>
+                <p>Fueron Brian Behlendorf y Cliff Skolnick quienes a través de una lista de correo coordinaron el trabajo y lograron establecer un 
+                    espacio compartido de libre acceso para los desarrolladores.</p>
+                <p>En 1999, se formó la Fundación de Software Apache (Apache Software Foundation) para obtener apoyo financiero, organizativo y legal
+                     para el servidor.</p>    
+                <p>Entre las principales características de Apache, se encuentran...:<br><br>
+                        - Soporte de seguridad SSL y TLS.<br>
+                        - Puede realizar autentificación de datos utilizando SGDB.<br>
+                        - Puede dar soporte a diferentes lenguajes, como Perl, PHP, Python y tcl.<br>
+                        - Coste. El servidor web Apache es completamente gratuito.<br>
+                        - Funcional y Soporte. Alta aceptación en la red y muy popular<br>
+                        - Multi-plataforma. Se puede instalar en muchos sistemas operativos, es compatible con Windows, Linux y MacOS.
+                </p>         
+            </article>
+
+            <article id="descarga">
+                <br><br><br>
+                <img src="imagenes/btdescarga.png" id="imgdescarga">
+                <p id="titApartado">Descarga</p>
+                <p>A lo largo de la guía encontrarás detalladamente qué archivos son los necesarios para la instalación del servidor Apache y cuándo utilizarlos, 
+                    así como del módulo PHP. Te dejamos a continuación en esta sección todos los necesarios:</p>
+                <p>Archivos binarios ejecutables para Windows: <br>
+                    -Apache Lounge <a href="http://www.apachelounge.com/download/">Ir al sitio</a><br> 
+                    -Apache Haus <a href="https://www.apachehaus.com/cgi-bin/download.plx">Ir al sitio</a></p>
+                <p>Entorno de ejecución Visual C++:<br>
+                    -Visual C++ Redistributable packages <a href="https://support.microsoft.com/es-es/help/2977003/the-latest-supported-visual-c-downloads">Ir al sitio</a></p>
+                <p>Descarga del módulo de PHP para Windows:<br>
+                    -PHP <a href="http://windows.php.net/download/">Ir al sitio</a></p>        
+            </article>
+
+            <article id="instalacion">
+                <br><br><br>
+                <img src="imagenes/btinstalacion.png" id="imginsta">
+                <p id="titApartado">Instalación</p>
+                <p>El servidor Apache constituye un software libre y de código abierto para servidores web desarrollado por la Apache Software 
+                    Foundation, que lo pone a disposición de la comunidad internauta de forma gratuita. Por regla general, escucha las peticiones
+                     HTTP en el puerto 80 y responde entregando documentos en HTML. Gracias a su construcción modular permite integrar diversas 
+                     funciones. Lo más habitual es combinarlo con bases de datos como MySQL y lenguajes de programación del lado del servidor como 
+                     PHP, Perl o Python, que permiten servir páginas web dinámicas. </p>
+                <p>El servidor web más popular a nivel mundial es Apache HTTP, que forma parte de diversos paquetes de software como LAMP, MAMP, WAMP o XAMPP. </p>
+                <p>A continuación, nos centraremos en la instalación y configuración del servidor web como componente aislado.</p>    
+                <p>Para poder ejecutar Apache en tu ordenador Windows lo único que necesitas es el paquete de software adecuado para tu sistema
+                     operativo. En su página web, sin embargo, la fundación Apache Software solo pone a disposición el código fuente. Los archivos 
+                     binarios ejecutables para Windows se encuentran en páginas como Apache Lounge o Apache Haus. Este tutorial se basa en la versión
+                      2.4.20 para sistemas de 64 bits descargada en el Apache Lounge (la versión disponible para descargar es siempre la más actual). </p>    
+                <p>Para utilizar Apache con Windows no necesitas instalar el programa. En lugar de ello, procede como te indicamos a continuación:</p>    
+                <p>1. Guarda el archivo .zip con el paquete de software en una carpeta de tu ordenador local.<br>
+                   2. Descomprime el archivo haciendo doble clic sobre el icono de la carpeta.<br>
+                   3. Copia la carpeta Apache24 en C:\.</p>  
+                <p>Ahora, todos los archivos que necesitas para la puesta en funcionamiento de tu servidor web Apache local se encuentran en C:\Apache24.
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS1/01.png"></div></p>  
+                <p>Tras la instalación es recomendable realizar una prueba. Para ello, dirígete a C:/Apache24 y abre la carpeta bin. Aquí se encuentra
+                     la aplicación httpd. Haciendo doble clic se inicia Apache.
+                     <br><br><div id="divCentrar"><img src="imagenes/imgS1/02.png"></div></p> 
+                <p>Por regla general, el sistema mostrará dos mensajes de error que indican, por un lado, que aún se han de instalar algunos componentes
+                     de software y, por el otro, que el firewall del sistema operativo bloquea al servidor.</p>  
+                <p><h3>Error del sistema httpd.exe</h3>
+                    Si instalas Apache en tu ordenador por primera vez, probablemente el sistema te hará saber que no se puede iniciar el servidor web
+                     porque no se ha encontrado el archivo VCRUNTIME140.dll.
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS1/03.png"></div></p>
+                <p>Este problema tiene solución y es precisamente la instalación de los componentes que faltan. Al estar escrito en C++, Apache
+                     necesita un entorno de ejecución adecuado, en este caso Visual C++. También conocido como Microsoft Visual C++, se trata de un
+                      entorno de desarrollo integrado para aplicaciones en C, C++ y C++/CLI en el entorno Windows. Con los denominados Visual C++ 
+                      Redistributable Packages, se pueden instalar aquellos componentes del entorno de ejecución que falten, disponibles de forma 
+                      gratuita en la página principal de Microsoft. Se instalan localmente haciendo doble clic en el archivo .exe. </p>                  
+                <p><h3>Aviso de seguridad del cortafuegos de Windows</h3>
+                    Habitualmente, todos los ordenadores están asegurados por un firewall que impide que programas externos accedan sin permiso al
+                     sistema desde una red. Si quieres que tu servidor Apache HTTP local esté disponible en una red doméstica o de oficina, has de 
+                     autorizar la comunicación de Apache en esta red de forma explícita. Esto se realiza en la misma notificación de seguridad que 
+                     te informa de que el cortafuegos ha bloqueado algunas funciones del servidor.
+                     <br><br><div id="divCentrar"><img src="imagenes/imgS1/04.png"></div></p> 
+                <p>Para autorizar el acceso a tu servidor en una de las redes disponibles, solo tienes que marcar la opción correspondiente y hacer 
+                    clic en el botón de confirmación (“Allow Access”). Es muy probable que necesites derechos de administrador para llevar a cabo 
+                    esta acción.<br><br>Tan pronto como se hayan instalado los componentes que faltaban y se hayan realizado los ajustes en el cortafuegos
+                    de acuerdo al modelo de uso que se tiene planificado, nada impedirá el funcionamiento del servidor Apache HTTP en su configuración
+                    predeterminada.<br><br>Inicia el servidor de nuevo con un doble clic en el archivo httpd. Acto seguido, se abre de forma automática
+                    una ventana de comandos en negro. Cuando quieras interrumpir el servidor, solo tienes que cerrar la ventana haciendo clic en 
+                    la “x” de la esquina superior derecha.</p>     
+                <p><div id="divCentrar"><img src="imagenes/imgS1/05.png"></div>
+                    <br><br>Para acceder a tu servidor desde un navegador web, teclea “localhost” o la dirección IP estándar “127.0.0.1” en la barra de
+                     navegación.<br><br>
+                    Si los ajustes se realizaron correctamente, el navegador debería mostrar una página index.html predeterminada con el siguiente 
+                    contenido “It works!” (¡Funciona!).
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS1/06.png"></div></p>    
+            </article>
+
+            <article id="confi">
+                <br><br><br>
+                <img src="imagenes/btconfi.png" id="imgconfi">
+                <p id="titApartado">Configuración</p>
+                <p>En principio, el servidor Apache HTTP, como paquete de software, está configurado por defecto de tal manera que podría funcionar
+                     sin ajustes adicionales. Los contenidos que quieras abrir con el servidor web se guardan en la configuración estándar en la
+                    carpeta htdocs en C:\Apache24 (C:/Apache24/htdocs) identificada como “DocumentRoot”, dentro del archivo de configuración httpd.conf.
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS1/07.png"></div></p>
+                <p>Si quieres guardar los documentos y los archivos de tu página web en otra carpeta diferente, la has de registrar en httpd.conf
+                     como “DocumentRoot” y “Directory”.<br><br>
+                     Como demostración hemos creado una nueva carpeta llamada “MyWeb” en C:\, que ha de servir de archivo para una página web
+                      ficticia. En esta carpeta depositamos los dos documentos HTML test-1 y test-2.</p>
+                <p><div id="divCentrar"><img src="imagenes/imgS1/08.png"></div>
+                    <br>En el archivo httpd.conf cambiamos la información en “DocumentRoot” y “Directory” en función de nuestras nuevas carpetas, 
+                    sustituyendo “C:/Apache24/htdocs” por “C:/MyWeb” en ambos puestos.</p>  
+                <p><div id="divCentrar"><img src="imagenes/imgS1/09.png"></div>
+                    <br>Tras reiniciar Apache, accede al servidor con la dirección localhost y el navegador web mostrará el Index de nuestro directorio
+                     con las páginas HTML test-1.html y test-2.html.
+                     <br><br><div id="divCentrar"><img src="imagenes/imgS1/10.png"></div>
+                    <br>Se puede comprobar si se llevaron a cabo los cambios satisfactoriamente accediendo al Index del directorio web tras 
+                    reiniciar el servidor web vía localhost </p>    
+            </article>
+
+            <article id="php">
+                <br><br><br>
+                <img src="imagenes/btphp.png" id="imgphp">
+                <p id="titApartado">Módulo PHP</p>
+                <p>Una vez instalado Apache será necesario instalar PHP el cual podemos descargar desde el enlace de la sección descargas.
+                    <br><br>Una vez descargado extraeremos el contenido en una carpeta la cual renombraremos php y la pegaremos en la raíz de C:
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS1/11.png"></div>
+                    <br><br>Allí editaremos el archivo INI, bien sea el de producción o desarrollo, y estableceremos la siguiente línea:
+                    <br><br><div id="divCentrar">extension_dir = “C:phpext”</div>
+                    <br>Allí podremos permitir otras extensiones según sea necesario como: Curl, GD, MySQL. A continuación iremos a 
+                    Panel de control\Sistema y seguridad\Sistema
+                    <br><br>Allí pulsamos en la opción Configuración avanzada del sistema y será desplegada la siguiente ventana:
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS1/12.png"></div>
+                    <br>Allí pulsamos en el botón Variables de entorno y en la nueva ventana vamos a la sección Variables del sistema ubicamos la 
+                    línea Path y pulsamos en el botón Editar:
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS1/13.png"></div>
+                    <br>En la ventana desplegada pulsamos en el botón Nuevo y añadiremos la línea C:\php:
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS1/14.png"></div>
+                    <br>Pulsamos en Aceptar para guardar los cambios. Después de configurar la variable de entorno, es necesario reiniciar el sistema.
+                </p>
+                <p>Ahora debemos editar el archivo de configuración de Apache y añadir las siguientes líneas en la parte inferior del archivo y
+                     guardamos los cambios.
+                    <br><br>C:Apache24Confhttpd.confLoadModule php5_module “c:/php/php5apache2_4.dll”
+                    <br>AddHandler application/x-httpd-php .php
+                    <br># configure the path to php.ini
+                    <br>PHPIniDir “C:/php”
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS1/15.png"></div>
+                    </p>
+                    <p>Fuentes: <a href="https://www.1and1.es/digitalguide/servidores/configuracion/instala-apache-en-tu-pc/">Fuente 1</a>,
+                        <a href="https://www.solvetic.com/tutoriales/article/4376-como-instalar-manualmente-apache-php-mysql-windows-10">Fuente 2</a></p>    
+            </article>
+
+        </section>
+
+        <footer>
+            <br>
+            Trabajo Diseño interfaces web (primer trimestre)<br>
+            Víctor Montes Rodríguez<br>
+            Curso 2017-2018<br>
+        </footer>
+    
+
+	</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+        <title>Servidor web Cherokee</title>
+        
+        <link rel="icon" type="image/gif" href="imagenes/faviconch.ico" />
+	
+        <style type="text/css">
+        
+            @import url('https://fonts.googleapis.com/css?family=Orbitron');
+            @import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+            body{
+                background: url("imagenes/fondoblur.jpg") center center no-repeat fixed;
+            }
+
+            header{
+                /*border: 1px solid grey;*/
+                height: 100px;
+                width: 100%;
+                position: fixed; 
+            }
+
+            /*Lista de barra de navegación*/
+            ul{
+                list-style: none;
+                position: relative; 
+                left: 7%; /*Para posicionar la lista respecto del header*/
+            }
+
+            @media screen and (max-width: 500px){
+                ul{
+                    display: none;
+                } 
+            }
+            @media screen and (min-width: 1500px){
+                ul{
+                    left: 12%; /*Para posicionar la lista respecto del header*/
+                } 
+            }
+            @media screen and (min-width: 1700px){
+                ul{
+                    left: 16%; /*Para posicionar la lista respecto del header*/
+                } 
+            }
+            @media screen and (min-width: 1900px){
+                ul{
+                    left: 20%; /*Para posicionar la lista respecto del header*/
+                } 
+            }
+
+            ul li{
+                font-size: 20px;
+                
+            }
+
+            ul li a{
+                border-radius: 20px;
+                color: white;
+                text-decoration: none;
+                float: left;
+                margin-right: 40px; 
+                padding: 20px;
+                font-family: Orbitron;
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            }
+
+            ul li a:hover{
+                transition-property: background;
+                transition-duration: 1s;
+            }
+
+            ul li #btinicio:hover{
+                background: url("imagenes/btinicio.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0); /*Para poner el color transparente*/
+            }
+
+            ul li #btintro:hover{
+                background: url("imagenes/btintroduccion.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+
+            ul li #btdescarga:hover{
+                background: url("imagenes/btdescarga.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+
+            ul li #btinsta:hover{
+                background: url("imagenes/btinstalacion.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+
+            ul li #btconfi:hover{
+                background: url("imagenes/btconfi.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+
+            ul li #btphp:hover{
+                background: url("imagenes/btphp.png") center no-repeat;
+                background-size: contain;
+                color:rgba(0,0,0,0);
+            }
+            /*Fin lista barra navegación*/
+
+            section{
+                font-family: 'Quicksand', sans-serif;
+                /*border: 1px solid green;*/
+                word-wrap: break-word;  /*si supera el div, corta el texto y lo pone abajo*/
+                margin: 0% 3% 3% 3%;
+                padding-top: 100px; /* Relleno "manual" para que la cabecera no se sobreponga en la sección*/
+                box-shadow: 14px 22px 73px -10px rgba(0,0,0,0.75); /*COMPROBAR AL FINAL DEL TODO SI QUEDA BIEN LA SOMBRA EN EL SECTION*/
+                
+            }
+
+			footer{
+                font-family: 'Quicksand', sans-serif;
+                /*border: 1px solid blue;*/
+                height: 100px;
+            }
+
+            /*Apartado de imágenes dentro del section (para darles un tamaño adecuado a cada una)*/
+            #imgintro{
+                width: 50%;
+                height: 50%;
+                margin: 5% 0% 0% 25%;
+            }
+
+            #imgdescarga{
+                width: 20%;
+                height: 20%;
+                margin: 5% 0% 0% 40%;
+            }
+
+            #imginsta{
+                width: 20%;
+                height: 20%;
+                margin: 5% 0% 0% 40%;
+            }
+
+            #imgconfi{
+                width: 20%;
+                height: 10%;
+                margin: 5% 0% 0% 40%;
+            }
+
+            #imgphp{
+                width: 20%;
+                height: 10%;
+                margin: 5% 0% 0% 40%;
+            }
+            /*fin apartado imágenes*/
+
+            #titApartado{
+                font-family: Orbitron;
+                font-size: 25px;
+                text-align: center; 
+            }
+
+            article{    /* Para centrar un poco más el contenido de las section y que no se expanda tanto a los lados  de la página*/
+                width: 80%;
+                margin-left: 10%;
+            }
+
+            #divCentrar{/* Div contenedor para centrar todas las imágenes dentro de los artículos*/
+                text-align: center;
+            }
+
+            #php{   /*Para darle un padding al último artículo y que no esté pegado con la caja*/
+                padding-bottom: 3%;
+            }
+
+            /*Estilizar los títulos*/
+            h3{
+                color: blue;
+            }
+
+			
+		</style>
+
+	</head>
+
+	<body>
+        
+        <header>
+            <ul>
+                <li><a href="inicio.html" id="btinicio">Inicio</a></li>
+                <li><a href="#introduccion" id="btintro">Introducción</a></li>
+                <li><a href="#descarga" id="btdescarga">Descarga</a></li>
+                <li><a href="#instalacion" id="btinsta">Instalación</a></li>
+                <li><a href="#confi" id="btconfi">Configuración</a></li>
+                <li><a href="#php" id="btphp">PHP</a></li>
+            </ul>
+        </header>
+
+        <section>
+
+            <article id="introduccion">
+                <img src="imagenes/imgservidor3.png" id="imgintro">
+                <img src="imagenes/debian.png" id="imgintro">
+                <p id="titApartado">Introducción</p>
+                <p>Cherokee es un servidor web multiplataforma. Su objetivo es ser rápido y completamente funcional, sin dejar de ser liviano comparado
+                     con otros servidores web. Está escrito completamente en C. Puede usarse como un sistema embebido y soporta complementos para
+                      aumentar sus funcionalidades. Es software libre, disponible bajo la Licencia Pública General de GNU.
+                    <br><br>Comencemos poniendo algunas de las características que soporta: FastCGI, SCGI, PHP, CGI, SSI, TLS y conexiones cifradas
+                     SSL, host virtuales, autenticación, codificación al vuelo, balanceo de carga, archivos de log compatibles con apache, balanceador
+                      de base de datos, actualizaciones sin parada del servicio, proxy HTTP inverso y mucho más. A destacar:
+                    <br><br>- Actualizaciones sin parada del servicio que puede ser muy importante para algunos servicios que no pueden permitirse
+                     dejar de dar servicio ningún segundo.
+                    <br><br>- Configuración a través de una consola de administración accesible con el navegador esto no se si es una ventaja o desventaja
+                     ya que no sigue la filosofía de los sistemas Unix de realizar la configuración mediante un archivo de texto para hacer una
+                      restauración de la configuración en caso de que la perdamos pero sin duda hace que la configuración se realice más comodamente
+                       y es algo que no tienen otros servidores por lo que he considerado importante destacarlo. También podemos editarlo directamente
+                        aunque realmente no estaremos interesados en ello a menos que seamos un usuario avanzado.
+                    <br><br>- Cherokee Market con el que podremos instalar ciertos servicios de forma muy cómoda y con poca configuración, como por
+                     ejemplo, instalar un servicio de Drupal, Wordpress, phpBB, phpMyAdmin, nuxeo, Liferay y algunos otros.
+                    <br><br>- Host virtuales SSL con esta característica podemos usar SSL en host virtuales ya que cherokee hace uso del método
+                     Server Name Indication (SNI) por el que en la negociación de la sesión TLS se envía el nombre del host que se quiere acceder.
+                      Esta era una imitación importante al usar SSL en servidores virtuales basados en nombres.</p>
+            </article>
+
+            <article id="descarga">
+                <br><br><br>
+                <img src="imagenes/btdescarga.png" id="imgdescarga">
+                <p id="titApartado">Descarga</p>
+                <p>A lo largo de la guía encontrarás detalladamente qué archivos son los necesarios para la instalación del servidor Cherokee y cuándo utilizarlos, 
+                        así como del módulo PHP. Te dejamos a continuación en esta sección todos los necesarios:</p>
+                <p>MySQL: # apt-get install mysql-
+                    <br>PHP: # apt-get install php5 php5-cgi php5-mysql php5-gd php5-curl php-pear php5-imagick php5-memcache php5-xmlrpc php5-xsl 
+                    <br>Cherokee: # apt-get install cherokee 
+                </p>
+            </article>
+
+            <article id="instalacion">
+                <br><br><br>
+                <img src="imagenes/btinstalacion.png" id="imginsta">
+                <p id="titApartado">Instalación</p>
+                <p><h3>Instalación MySQL</h3>Lo primero que tenemos que hacer es instalar MySQL.
+                    <br><br>Para instalar el servidor MySQL tenemos que ejecutar el siguiente comando:
+                    <br><br>root@debian:~# apt-get install mysql-server mysql-client
+                    <br><div id="divCentrar"><img src="imagenes/imgS3/01.jpg"></div>
+                    <br>Y luego seguir las instrucciones que les van aparecer.</p>
+                <p><h3>Instalación PHP</h3>Luego instalar PHP5 y agregar soporte FastCGI. Esto es necesario para el servidor web Cherokee.
+                    <br><br>Para instalar PHP con soporte FastCGI debemos ejecutar el siguiente comando: 
+                    <br><br>root@debian:~# apt-get install php5 php5-cgi php5-mysql php5-gd php5-curl php-pear php5-imagick php5-memcache php5-xmlrpc php5-xsl
+                    <br><div id="divCentrar"><img src="imagenes/imgS3/02.jpg"></div>
+                    <br><br>Despues de que termina el proceso anterior tenemos que abrir el archivo "php.ini" para modificarlo: 
+                    <br><br>nano /etc/php5/cgi/php.ini 
+                    <br><br>Luego descomentar la siguiente linea: 
+                    <br><br>cgi.fix_pathinfo = 1
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS3/03.jpg"></div>
+                    <br><br>Tenemos que quitarle el ;</p>
+                <p><h3>Instalación del servidor Web Cherokee en Debian.</h3>
+                    Para instalar el servidor Web Cherokee tenemos que ejecutar el siguiente comando:
+                    <br><br>root@debian:~# apt-get install cherokee
+                    <br><div id="divCentrar"><img src="imagenes/imgS3/04.jpg"></div></p>   
+            </article>
+
+            <article id="confi">
+                <br><br><br>
+                <img src="imagenes/btconfi.png" id="imgconfi">
+                <p id="titApartado">Configuración</p>
+                <p><h3>Iniciar y configurar la interfaz Cherokee Admin.</h3>
+                    Para iniciar la interfaz de administración Cherokee tenemos que ejecutar el siguiente comando: 
+                    <br><br>root@debian:~# cherokee-admin -b 10.10.10.11 
+                    <br><br>Nota:Si no esta instalado el servidor Web Cherokee en el localhost tenemos que enlazar en cherokee-admin la direccion IP
+                     ya que por defecto cherokee-admin solo se conecta a localhost.
+                    <br><br>Al ejecutar cherokee-admin le proporcionará nombre de usuario y contraseña.
+                    <br><div id="divCentrar"><img src="imagenes/imgS3/05.jpg"></div>
+                    <br><br>Ahora tenemos que abrir el navegor y entrar a la siguiente direccion http://10.10.10.11:9090/ (reemplazamos 10.10.10.11 
+                    con nuestra direccion IP) y loguerse con el nombre de usuario y contraseña que nos proporciono cherokee-admin.
+                    <br><br>Nota: Para detener el panel de control ahi que presionar CTRL C
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS3/06.jpg"></div>
+                </p>
+            </article>
+
+            <article id="php">
+                <img src="imagenes/btphp.png" id="imgphp">
+                <p id="titApartado">Módulo PHP</p>
+                <p><h3>Activacion de PHP5 con soporte FastCGI en Cherokee</h3>
+                    Iniciar sesion en la interfaz de administracion (http://tu_ip:9090/) y vamos a vServers. Luego hacemos clic en el host
+                     virtual por defecto y vamos a la pestaña Comportamiento, ahora hacemos clic sobre la gestion de reglas Rule Management.
+                     <br><br><div id="divCentrar"><img src="imagenes/imgS3/07.jpg"></div>
+                    <br><br>Ahora, a la izquierda veremos todas las normas actualmente existentes, hacemos clic en el boton Nueva regla o Nuevo:
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS3/08.jpg"></div>
+                    <br>Ahora seleccionaremos la pestaña lenguajes y luego elegir PHP, despues hacer clic en Añadir. 
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS3/09.jpg"></div>
+                    <br><br>Ahora hacemos clic en el boton Crear
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS3/10.png"></div>
+                    <br><br>La nueva regla fue añadida a la columna de la izquierda con el nombre Extensions php y el estado no FINAL. Haga clic en
+                     no FINAL y cambiará al FINAL: 
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS3/11.jpg"></div>
+                    <br><br>Ahora lo unico que necesitamos es guardar todos los cambios. Hacemos clic en guardar el boton situado en la esquina superior derecha.
+                </p>
+                <p><h3>Comprobar la configuración de PHP5.</h3>
+                    La raíz de documentos por defecto para el sitio web es / var / www. Aqui es necesario crear un archivo llamado phpinfo.php.
+                    <br><br>nano /var/www/php.info 
+                    <br><br>Ingresamos el siguiente contenido en el archivo phpinfo.php:
+                    <br><br>< ?php  //sin la separación
+                            <br>phpinfo();
+                            <br>?> 
+                    <br><br>Para poder acceder al archivo desde el navegador web (http://tu_ip/phpinfo.php) y usted debería ver una pantalla como esta:        
+                    <br><br><div id="divCentrar"><img src="imagenes/imgS3/12.jpg"></div>
+                </p>
+                <p>Fuentes: <a href="https://www.taringa.net/posts/linux/16205897/Configurar-servidor-Web-Cherokee-con-PHP5-y-MySQL-en-Debian.html">Fuente 1</a>,
+                     <a href="http://elblogdepicodev.blogspot.com.es/2011/05/servidor-web-ligero-cherokee.html">Fuente 2</a></p>             
+            </article>
+
+        </section>
+
+        <footer>
+            <br>
+            Trabajo Diseño interfaces web (primer trimestre)<br>
+            Víctor Montes Rodríguez<br>
+            Curso 2017-2018<br>
+        </footer>
+    
+
+	</body>
+</html>
